@@ -8,7 +8,7 @@
   <description>Root Maven project</description>
   
   <modules>
-  	<module>FrontEnd</module>
+  	<module>FrontEnd</module> 
   	<module>BackEnd</module>
   </modules>
 </project>
