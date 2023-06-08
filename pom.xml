@@ -10,6 +10,7 @@
   <modules>
   	<module>FrontEnd</module> 
   	<module>BackEnd</module>
+  	<module>Delivery</module>
   </modules>
 </project>
 
