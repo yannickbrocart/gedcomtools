@@ -6,13 +6,39 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>3.1.0</version>
+    <relativePath/> <!-- lookup parent from repository -->
   </parent>
   
   <groupId>com.yannick</groupId>
   <artifactId>gedcomtools</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
+  
   <name>gedcomtools</name>
   <description>Gedcom Tools for Spring Boot and Angular</description>
+  
+  <modules>
+  	<module>backend</module>
+  	<module>frontend</module>
+  	<module>delivery</module>
+  </modules>
+  
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	
+		<dependencies>
+		<dependency>
+	  		<groupId>org.apache.maven.plugins</groupId>
+      		<artifactId>maven-compiler-plugin</artifactId>
+      		<version>3.11.0</version>
+      		<type>maven-plugin</type>
+    	</dependency>
+    </dependencies>
   
 </project>
