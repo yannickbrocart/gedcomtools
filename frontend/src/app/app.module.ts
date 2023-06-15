@@ -4,16 +4,17 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FileDownloadComponent } from './file-download/file-download.component';
+import { ReadFileComponent } from './read-file/read-file.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FileDownloadComponent
+    ReadFileComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,24 @@
+body {
+	background-color: #FCFDFD;
+}
+
+label {
+	color: #34495E;
+	font-weight: bold;
+}
+
+
+.form-text {
+	color: #34495E;
+}
+
+.btn-primary {
+		background-color: #1ABC9C;
+		border: 0px;
+		color: #FCFDFD;
+	}
+	
+.btn-primary:hover {
+		background-color: #34495E;
+		color: #1ABC9C;
+	}

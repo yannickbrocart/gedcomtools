@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Titre de la page</title>
+</head>
+<body>
+  <div class="container-fluid">
+	<form>
+	  <div class="form-group">
+	    <label for="fileInput">Choose GEDCOM file to read:</label>
+	    <input type="file" [(ngModel)]="fileInput"
+	    	class="form-control-file" id="fileInput" name="fileInput" accept=".ged" required>	    
+	    <small id="fileInputHelp" class="form-text">Must be a 5.5.1 GedCom file.</small>  	
+	  </div>
+	  <button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
+</body>
+</html>

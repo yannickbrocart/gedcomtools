@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ReadFileComponent } from './read-file/read-file.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+	{ path: '',
+		component: ReadFileComponent		
+	},
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
