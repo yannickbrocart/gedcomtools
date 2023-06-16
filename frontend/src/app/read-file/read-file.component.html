@@ -9,11 +9,12 @@
 	<form>
 	  <div class="form-group">
 	    <label for="fileInput">Choose GEDCOM file to read:</label>
-	    <input type="file" [(ngModel)]="fileInput"
-	    	class="form-control-file" id="fileInput" name="fileInput" accept=".ged" required>	    
-	    <small id="fileInputHelp" class="form-text">Must be a 5.5.1 GedCom file.</small>  	
+	    <input type="file" [formControl]="fileInputControl" [pattern]="gedPattern" (change)="fileInputControl"
+			class="form-control-file" id="fileInput" name="fileInput">	  
+			{{ fileInputControl.value }} / {{ fileInputControl.status }}  
+	    <small *ngIf="fileInputControl.errors?.['pattern']">Must be a 5.5.1 GedCom file.</small>  	
 	  </div>
-	  <button type="submit" class="btn btn-primary">Submit</button>
+	  <button type="submit" class="btn btn-primary" (click)="submitFileInput()">Submit</button>
 	</form>
 </div>
 </body>
