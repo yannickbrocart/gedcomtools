@@ -6,15 +6,31 @@
 </head>
 <body>
   <div class="container-fluid">
-	<form>
+	<form [formGroup]="fileForm" (ngSubmit)="onSubmit()">
+	  
 	  <div class="form-group">
-	    <label for="fileInput">Choose GEDCOM file to read:</label>
-	    <input type="file" [formControl]="fileInputControl" [pattern]="gedPattern" (change)="fileInputControl"
-			class="form-control-file" id="fileInput" name="fileInput">	  
-			{{ fileInputControl.value }} / {{ fileInputControl.status }}  
-	    <small *ngIf="fileInputControl.errors?.['pattern']">Must be a 5.5.1 GedCom file.</small>  	
+	    <label for="fileFullPath">Choose a 5.5.1 GEDCOM file to read:</label>
+	    <input type="file" class="form-control-file" id="fileFullPath" 
+	    	formControlName="fileFullPath" [pattern]="gedPattern">	  
+	    <label *ngIf="fileForm.controls.fileFullPath.errors?.['pattern']" [ngClass] = "'error'">
+	    	File must be a GedCom file.</label> 	 
 	  </div>
-	  <button type="submit" class="btn btn-primary" (click)="submitFileInput()">Submit</button>
+	  
+	  <div class="form-group">
+	    <label for="projectName">GEDCOM project name:</label>
+	    <input type="text" class="form-control-file" id="projectName" 
+	    	formControlName="projectName">
+	    <label *ngIf="fileForm.controls.projectName.errors?.['required']" [ngClass] = "'error'">
+			Name is required!</label> 
+		<label *ngIf="fileForm.controls.projectName.errors?.['pattern']" [ngClass] = "'error'">
+			Project name not valid (only letters, numbers, '-' and '_')</label> 	 
+		<label *ngIf="fileForm.controls.projectName.errors?.['minlength']" [ngClass] = "'error'">
+			Name must be at least 3 characters long</label>
+		<label *ngIf="fileForm.controls.projectName.errors?.['maxlength']" [ngClass] = "'error'">
+			Name must be 60 characters long</label>  
+	  </div>
+	  
+	  <button type="submit" class="btn btn-primary" [disabled]="!fileForm.valid">Submit</button>
 	</form>
 </div>
 </body>
