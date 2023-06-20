@@ -36,19 +36,13 @@
 	<div class="code-box">
 		<div class="code-content">
 			<span class="code-token-name">File path: </span>
-			<span *ngIf="!fileForm.controls.fileFullPath.errors">
-				<span class="code-token-string">{{fileForm.controls.fileFullPath.value}}</span>
-			</span><br>
-				<span class="code-token-name">File name: </span>
-			<span *ngIf="fileName">{{fileName}}
-			</span><br>
-			<span><span class="code-token-name">Last modified: </span>{{fileLastModified}}</span><br>
-			<span><span class="code-token-name">Size: </span>{{fileSize}}</span><br>
-			<span><span class="code-token-name">Type: </span>{{fileType}}</span><br>
+			<span class="code-token-string">{{fileForm.controls.fileFullPath.value}}</span><br>
+			<span class="code-token-name">File name: </span>{{fileName}}<br>
+			<span class="code-token-name">Last modified: </span>{{fileLastModified}}<br>
+			<span class="code-token-name">Size: </span>{{fileSize}}<br>
+			<span><span class="code-token-name">Type: </span><span *ngIf="fileType===''">Unspecified</span>{{fileType}}</span><br>
 			<span class="code-token-name">Project name: </span>
-			<span *ngIf="!fileForm.controls.projectName.errors">
-				{{fileForm.controls.projectName.value}}
-			</span><br>
+			<span *ngIf="!fileForm.controls.projectName.errors">{{fileForm.controls.projectName.value}}</span><br>
 		</div>
 	</div>
 	
