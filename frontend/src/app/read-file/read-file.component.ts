@@ -1,4 +1,5 @@
 import { Component  } from '@angular/core';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -10,8 +11,14 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class ReadFileComponent {
 	
 	gedPattern = "^.*\\.ged$";
-	projectNamePattern = "^[a-z0-9_-]{1,60}$";
-	
+	projectNamePattern = "^[a-z0-9_-]{0,60}$";
+	fileName!: string;
+	filePath!: string;
+	fileString!: string;
+	fileLastModified!: number;
+	fileSize!: number;
+	fileType!: string;
+		
 	fileForm = new FormGroup({
 	    fileFullPath: new FormControl('', Validators.required),
 	    projectName: new FormControl('', 
@@ -21,18 +28,24 @@ export class ReadFileComponent {
 	    		 Validators.pattern(this.projectNamePattern)]),	    
 	});
 	
-	constructor() { } 
+	constructor(private http: HttpClient) {} 
 	
-	fileImputChangeValue() {
-		console.log("CHANGE " + this.fileForm.value);
+	readGedcomFile() {}
+	
+	fileFullPathChangeValue(fullPath : any) {
+		const file: File = fullPath.target.files[0];
+		this.filePath = this.fileForm.controls.fileFullPath.value as string;
+		if (!this.fileForm.controls.fileFullPath.errors) this.fileName = file.name;	
+		this.fileLastModified = file.lastModified;
+		this.fileSize = file.size;
+		this.fileType = file.type;
+
 	}
-  
+	
+	projectNameChangeValue() {
+		console.log("CHANGE: " + this.fileForm.controls.projectName.value);
+	}
+
 	onSubmit(){
-		console.log('Path: ' + this.fileForm.controls.fileFullPath.value);
-		console.log('Path validation status: ' + this.fileForm.controls.fileFullPath.status);
-		var filePath = this.fileForm.controls.fileFullPath.value;
-		var fileName = filePath.substr(filePath.lastIndexOf('\\') + 1);
-		console.log('Name: ' + this.fileForm.controls.projectName.value);
-		console.log('Name validation status: ' + this.fileForm.controls.projectName.status);
 	}
 }

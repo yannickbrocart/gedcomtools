@@ -35,3 +35,30 @@ label {
     color: red;
     font-size: .9em;
 }
+
+.code-box {
+	background: #F6F8FA;
+	border: 0;
+	margin: 0;
+	border: 1px solid #f6f8fa;
+	border-radius: 3px;	
+}
+
+.code-content {
+	background: none;
+	font-family: monospace;
+	font-size: 1.05em;
+	font-weight: 400;
+	color: rgba(0,0,0,.87);
+	line-height: 1.7;
+	padding: 24px 20px;
+	text-align: left;
+}
+
+.code-token-name {
+	color: #0069C2;
+}
+
+.code-token-string {
+	color: #690;
+}
