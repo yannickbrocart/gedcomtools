@@ -6,11 +6,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReadFileComponent } from './read-file/read-file.component';
+import { ImportFileComponent } from './import-file/import-file.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReadFileComponent
+    ReadFileComponent,
+    ImportFileComponent
   ],
   imports: [
     BrowserModule,
