@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yannick.gedcomtools.model.Gedcom;
 import com.yannick.gedcomtools.repository.GedcomRepository;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api")
 public class GedcomControler {

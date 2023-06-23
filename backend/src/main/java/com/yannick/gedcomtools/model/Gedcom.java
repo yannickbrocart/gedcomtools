@@ -14,8 +14,8 @@ import jakarta.persistence.Table;
 public class Gedcom {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long gedcomId;
 
 	@Column(name = "name")
 	private String name;
@@ -29,10 +29,14 @@ public class Gedcom {
 	@Column(name = "last_modified_time")
 	private Date lastModifiedTime;
 
-	@Column(name = "created_by")
+	@ManyToOne(cascade = CascadeType.ALL, targetEntity = User.class)
+	@JoinColumn(name = "user_id")
+	@Column(name = "last_modified_time")
 	private User createdBy;
 
-	@Column(name = "last_modified_by")
+	@ManyToOne(cascade = CascadeType.ALL, targetEntity = User.class)
+	@JoinColumn(name = "user_id")
+	@Column(name = "lastModifiedBy")
 	private User lastModifiedBy;
 
 	@Column(name = "status")

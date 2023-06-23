@@ -2,13 +2,27 @@ package com.yannick.gedcomtools.model;
 
 import java.util.Date;
 
+@Entity
+@Table(name = "USERS")
 public class User {
 
-	private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long userId;
+	
+	@Column(name = "first_name")
 	private String firstName;
+	
+	@Column(name = "last_name")
 	private String lastName;
+	
+	@Column(name = "login")
 	private String login;
+	
+	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "registration_date")
 	private Date registrationDate;
 
 	public User(int id, String firstName, String lastName, String login, String email, Date registrationDate) {
