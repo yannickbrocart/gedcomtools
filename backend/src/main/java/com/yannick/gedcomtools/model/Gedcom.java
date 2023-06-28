@@ -10,42 +10,47 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "GEDCOMS")
+@Table(name = "gedcoms")
 public class Gedcom {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "gedcom_id", nullable=false)
 	private long gedcomId;
 
-	@Column(name = "name")
+	@Column(name = "name", nullable=false)
 	private String name;
 
-	@Column(name = "creation_time")
+	@Column(name = "creation_date", nullable=false)
 	private Date creationTime;
 
-	@Column(name = "last_access_time")
+	@Column(name = "last_access_date", nullable=true)
 	private Date lastAccessTime;
 
-	@Column(name = "last_modified_time")
+	@Column(name = "last_modified_date", nullable=true)
 	private Date lastModifiedTime;
 
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = User.class)
-	@JoinColumn(name = "user_id")
-	@Column(name = "last_modified_time")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "gedcoms_users_id")
+	@Column(name = "created_by", nullable=true)
 	private User createdBy;
 
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = User.class)
-	@JoinColumn(name = "user_id")
-	@Column(name = "lastModifiedBy")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "gedcoms_users_id")
+	@Column(name = "last_modified_by", nullable=true)
 	private User lastModifiedBy;
 
-	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status", nullable = false)
 	private GedcomStatusType status;
+	
 	// private Header header = null;
 	// private SubmissionRecord submissionRecord = null;
 	// private Record record = null;
 	// private TRLR trlr = null;
 
+	public Gedcom() {}
+	
 	public Gedcom(String Name, User createdBy) {
 		this.name = Name;
 		this.creationTime = new Date();
