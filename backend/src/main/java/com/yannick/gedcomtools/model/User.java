@@ -17,6 +17,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "gedcoms_users_id", nullable = false)
 	private long userId;
+
 	@Column(name = "first_name", nullable = false)
 	private String firstName;
 

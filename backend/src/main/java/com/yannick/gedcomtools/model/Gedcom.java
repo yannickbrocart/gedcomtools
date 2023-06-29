@@ -17,7 +17,7 @@ public class Gedcom {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "gedcom_id", nullable=false)
 	private long gedcomId;
-
+	
 	@Column(name = "name", nullable=false)
 	private String name;
 
@@ -30,13 +30,15 @@ public class Gedcom {
 	@Column(name = "last_modified_date", nullable=true)
 	private Date lastModifiedTime;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne((fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "gedcoms_users_id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@Column(name = "created_by", nullable=true)
 	private User createdBy;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne((fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "gedcoms_users_id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@Column(name = "last_modified_by", nullable=true)
 	private User lastModifiedBy;
 
