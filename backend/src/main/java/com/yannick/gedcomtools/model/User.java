@@ -18,6 +18,12 @@ public class User {
 	@Column(name = "gedcoms_users_id", nullable = false)
 	private long userId;
 
+	@OneToMany(targetEntity=Gedcom.class, mappedBy="createdBy", nullable = false)
+    private Set<Gedcom> gedcomsCreatedBy = new HashSet<Gedcom>();
+	
+	@OneToMany(targetEntity=Gedcom.class, mappedBy="lastModifiedBy", nullable = true)
+    private Set<Gedcom> gedcomsLastModifiedBy = new HashSet<Gedcom>();
+	
 	@Column(name = "first_name", nullable = false)
 	private String firstName;
 
@@ -57,10 +63,28 @@ public class User {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	private void setUserId(int userId) {
 		this.userId = userId;
 	}
 
+	public void addGedcomsCreatedBy(Gedcom gedcom) {
+		gedcom.setCreatedBy(this);
+		gedcomsCreatedBy.add(gedcom);
+		}
+	
+	public void addGedcomsLastModifiedBy(Gedcom gedcom) {
+		gedcom.setLastModifiedBy(this);
+		gedcomsLastModifiedBy.add(gedcom);
+		}
+	
+	public set<Gedcom> getGedcomsCreatedBy() {
+		return gedcomsCreatedBy;
+		}
+	
+	public set<Gedcom> getGedcomsLastModifiedBy() {
+		return gedcomsLastModifiedBy;
+		}
+	
 	public String getFirstName() {
 		return firstName;
 	}

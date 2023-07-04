@@ -30,27 +30,24 @@ public class Gedcom {
 	@Column(name = "last_modified_date", nullable=true)
 	private Date lastModifiedTime;
 
-	@ManyToOne((fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "gedcoms_users_id")
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	@Column(name = "created_by", nullable=true)
+	@ManyToOne
+	@JoinColumn(name = "gedcoms_users_id", nullable=false)
+//	@OnDelete(action = OnDeleteAction.CASCADE)
+//	@CreatedBy
+	@Column(name = "created_by")
 	private User createdBy;
 
-	@ManyToOne((fetch = FetchType.LAZY, optional = true)
-	@JoinColumn(name = "gedcoms_users_id")
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	@Column(name = "last_modified_by", nullable=true)
+	@ManyToOne
+	@JoinColumn(name = "gedcoms_users_id", nullable=true)
+//	@OnDelete(action = OnDeleteAction.CASCADE)
+//	@LastModifiedBy
+	@Column(name = "last_modified_by")
 	private User lastModifiedBy;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status", nullable = false)
 	private GedcomStatusType status;
 	
-	// private Header header = null;
-	// private SubmissionRecord submissionRecord = null;
-	// private Record record = null;
-	// private TRLR trlr = null;
-
 	public Gedcom() {}
 	
 	public Gedcom(String Name, User createdBy) {
@@ -76,7 +73,7 @@ public class Gedcom {
 		return this.id;
 	}
 
-	public void setId(int Id) {
+	private void setId(int Id) {
 		this.id = Id;
 	}
 

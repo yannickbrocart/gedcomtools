@@ -9,4 +9,6 @@ import com.yannick.gedcomtools.model.GedcomStatusType;
 import com.yannick.gedcomtools.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
+	
+	
 }

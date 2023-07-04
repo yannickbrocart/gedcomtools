@@ -1,8 +1,5 @@
 package com.yannick.gedcomtools.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,22 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yannick.gedcomtools.model.Gedcom;
-import com.yannick.gedcomtools.repository.GedcomRepository;
+import com.yannick.gedcomtools.model.User;
+import com.yannick.gedcomtools.repository.UserRepository;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/api")
-public class GedcomControler {
+@RequestMapping("/api/users")
+public class UserControler {
 
 	@Autowired
-	GedcomRepository gedcomRepository;
-
-	@GetMapping("/gedcoms")
-	public ResponseEntity<List<Gedcom>> getAllGedcoms(@RequestParam(required = false) String name) {
-		List<Gedcom> gedcoms = new ArrayList<Gedcom>();
-		gedcomRepository.findAll().forEach(gedcoms::add);
-		return new ResponseEntity<>(gedcoms, HttpStatus.OK);
-	}
+	UserRepository userRepository;
 
 }
