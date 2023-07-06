@@ -10,39 +10,33 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "gedcoms_users")
+@Table(name = "gedcom_file_users")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "gedcoms_users_id", nullable = false)
-	private long userId;
+	@Column(name = "gedcom_file_user_id")
+	private int userId;
 
-	@OneToMany(targetEntity=Gedcom.class, mappedBy="createdBy", nullable = false)
-    private Set<Gedcom> gedcomsCreatedBy = new HashSet<Gedcom>();
-	
-	@OneToMany(targetEntity=Gedcom.class, mappedBy="lastModifiedBy", nullable = true)
-    private Set<Gedcom> gedcomsLastModifiedBy = new HashSet<Gedcom>();
-	
-	@Column(name = "first_name", nullable = false)
+	@Column(name = "first_name")
 	private String firstName;
 
-	@Column(name = "last_name", nullable = false)
+	@Column(name = "last_name")
 	private String lastName;
 
-	@Column(name = "login", nullable = false)
+	@Column(name = "login")
 	private String login;
 
-	@Column(name = "email", nullable = false)
+	@Column(name = "email")
 	private String email;
 
-	@Column(name = "registration_date", nullable = false)
+	@Column(name = "registration_date")
 	private Date registrationDate;
 
 	public User() {
 	}
 
-	public User(long userId, String firstName, String lastName, String login, String email, Date registrationDate) {
+	public User(int userId, String firstName, String lastName, String login, String email, Date registrationDate) {
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -59,32 +53,10 @@ public class User {
 		this.registrationDate = new Date();
 	}
 
-	public long getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	private void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public void addGedcomsCreatedBy(Gedcom gedcom) {
-		gedcom.setCreatedBy(this);
-		gedcomsCreatedBy.add(gedcom);
-		}
-	
-	public void addGedcomsLastModifiedBy(Gedcom gedcom) {
-		gedcom.setLastModifiedBy(this);
-		gedcomsLastModifiedBy.add(gedcom);
-		}
-	
-	public set<Gedcom> getGedcomsCreatedBy() {
-		return gedcomsCreatedBy;
-		}
-	
-	public set<Gedcom> getGedcomsLastModifiedBy() {
-		return gedcomsLastModifiedBy;
-		}
-	
 	public String getFirstName() {
 		return firstName;
 	}

@@ -2,54 +2,73 @@ package com.yannick.gedcomtools.model;
 
 import java.util.Date;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedBy;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "gedcoms")
+@Table(name = "gedcom_files")
 public class Gedcom {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "gedcom_id", nullable=false)
-	private long gedcomId;
-	
-	@Column(name = "name", nullable=false)
+	@Column(name = "gedcom_file_id")
+	private int gedcomId;
+
+	@Column(name = "name", nullable = false, length = 64)
 	private String name;
 
-	@Column(name = "creation_date", nullable=false)
+	/*
+	 * private HeaderRecord header = null;
+	 * 
+	 * private SubmissionRecord submissionRecord = null;
+	 * 
+	 * private Record record = null;
+	 * 
+	 * private TrailerRecord trlr = null;
+	 * 
+	 */
+
+	@Column(name = "creation_date")
 	private Date creationTime;
 
-	@Column(name = "last_access_date", nullable=true)
+	@Column(name = "last_access_date")
 	private Date lastAccessTime;
 
-	@Column(name = "last_modified_date", nullable=true)
+	@Column(name = "last_modified_date")
 	private Date lastModifiedTime;
 
 	@ManyToOne
-	@JoinColumn(name = "gedcoms_users_id", nullable=false)
-//	@OnDelete(action = OnDeleteAction.CASCADE)
-//	@CreatedBy
-	@Column(name = "created_by")
+	@JoinColumn(referencedColumnName = "gedcom_file_user_id", name = "createdBy")
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@CreatedBy
 	private User createdBy;
 
 	@ManyToOne
-	@JoinColumn(name = "gedcoms_users_id", nullable=true)
-//	@OnDelete(action = OnDeleteAction.CASCADE)
-//	@LastModifiedBy
-	@Column(name = "last_modified_by")
+	@JoinColumn(referencedColumnName = "gedcom_file_user_id", name = "lastModifiedBy")
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@LastModifiedBy
 	private User lastModifiedBy;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "status", nullable = false)
+	@Column(name = "status")
 	private GedcomStatusType status;
-	
-	public Gedcom() {}
-	
+
+	public Gedcom() {
+	}
+
 	public Gedcom(String Name, User createdBy) {
 		this.name = Name;
 		this.creationTime = new Date();
@@ -57,9 +76,9 @@ public class Gedcom {
 		this.status = GedcomStatusType.created;
 	}
 
-	public Gedcom(long id, String name, Date creationTime, Date lastAccessTime, Date lastModified, User createdBy,
+	public Gedcom(int gedcomId, String name, Date creationTime, Date lastAccessTime, Date lastModified, User createdBy,
 			User lastModifiedBy, GedcomStatusType status) {
-		this.id = id;
+		this.gedcomId = gedcomId;
 		this.name = name;
 		this.creationTime = creationTime;
 		this.lastAccessTime = lastAccessTime;
@@ -69,12 +88,8 @@ public class Gedcom {
 		this.status = status;
 	}
 
-	public long getId() {
-		return this.id;
-	}
-
-	private void setId(int Id) {
-		this.id = Id;
+	public int getGedcomId() {
+		return this.gedcomId;
 	}
 
 	public String getName() {
@@ -135,9 +150,9 @@ public class Gedcom {
 
 	@Override
 	public String toString() {
-		return "Gedcom [id = " + id + ", name = " + name + ", creationTime = " + creationTime + ", lastAccessTime = "
-				+ lastAccessTime + ", lastModifiedTime = " + lastModifiedTime + ", createdBy = " + createdBy
-				+ ", lastModifiedBy = " + lastModifiedBy + ", status = " + status + "]";
+		return "Gedcom [gedcomId = " + gedcomId + ", name = " + name + ", creationTime = " + creationTime
+				+ ", lastAccessTime = " + lastAccessTime + ", lastModifiedTime = " + lastModifiedTime + ", createdBy = "
+				+ createdBy + ", lastModifiedBy = " + lastModifiedBy + ", status = " + status + "]";
 	}
 
 }
