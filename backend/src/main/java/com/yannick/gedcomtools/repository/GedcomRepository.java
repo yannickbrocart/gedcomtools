@@ -1,18 +1,17 @@
 package com.yannick.gedcomtools.repository;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.yannick.gedcomtools.model.Gedcom;
-import com.yannick.gedcomtools.model.GedcomStatusType;
-import com.yannick.gedcomtools.model.User;
 
 public interface GedcomRepository extends JpaRepository<Gedcom, Long> {
 
+	@Query("SELECT g FROM Gedcom g WHERE g.status = ?1")
 	List<Gedcom> findByStatus(GedcomStatusType status);
 
-	List<Gedcom> findByCreator(User createdBy);
-
-	List<Gedcom> findByLastModifier(User lastModifiedBy);
+//	@Query("SELECT * FROM gedcom_files g WHERE g.created_by = ?1")
+//	List<Gedcom> findByCreator(long creatorId);
+//
+//	@Query("SELECT * FROM gedcom_files g WHERE g.last_modified_by = ?1")
+//	List<Gedcom> findByLastModifier(long lastModifierId);
 }

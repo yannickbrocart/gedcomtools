@@ -25,7 +25,7 @@ public class Gedcom {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "gedcom_file_id")
-	private int gedcomId;
+	private long gedcomId;
 
 	@Column(name = "name", nullable = false, length = 64)
 	private String name;
@@ -37,7 +37,7 @@ public class Gedcom {
 	 * 
 	 * private Record record = null;
 	 * 
-	 * private TrailerRecord trlr = null;
+	 * private boolean trailer = null;
 	 * 
 	 */
 
@@ -51,13 +51,13 @@ public class Gedcom {
 	private Date lastModifiedTime;
 
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "gedcom_file_user_id", name = "createdBy")
+	@JoinColumn(referencedColumnName = "gedcom_file_user_id", name = "created_by")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@CreatedBy
 	private User createdBy;
 
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "gedcom_file_user_id", name = "lastModifiedBy")
+	@JoinColumn(referencedColumnName = "gedcom_file_user_id", name = "last_modified_by")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@LastModifiedBy
 	private User lastModifiedBy;
@@ -76,7 +76,7 @@ public class Gedcom {
 		this.status = GedcomStatusType.created;
 	}
 
-	public Gedcom(int gedcomId, String name, Date creationTime, Date lastAccessTime, Date lastModified, User createdBy,
+	public Gedcom(long gedcomId, String name, Date creationTime, Date lastAccessTime, Date lastModified, User createdBy,
 			User lastModifiedBy, GedcomStatusType status) {
 		this.gedcomId = gedcomId;
 		this.name = name;
@@ -88,7 +88,7 @@ public class Gedcom {
 		this.status = status;
 	}
 
-	public int getGedcomId() {
+	public long getGedcomId() {
 		return this.gedcomId;
 	}
 

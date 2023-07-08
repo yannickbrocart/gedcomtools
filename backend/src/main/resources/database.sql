@@ -27,7 +27,7 @@ CREATE TABLE gedcom_file_users (
       						UNIQUE c_uni_email (email),
       						INDEX c_ind_email (email),
 	registration_date		datetime 					NOT NULL,
-							UNIQUE c_uni_name (first_name, last_name)
+	UNIQUE c_uni_name (first_name, last_name)
 );
 
 INSERT INTO gedcom_file_users (gedcom_file_user_id, first_name, last_name, login, email, registration_date) 
