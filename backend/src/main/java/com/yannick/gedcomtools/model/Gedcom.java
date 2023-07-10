@@ -17,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "gedcom_files")
@@ -30,16 +31,17 @@ public class Gedcom {
 	@Column(name = "name", nullable = false, length = 64)
 	private String name;
 
-	/*
-	 * private HeaderRecord header = null;
-	 * 
-	 * private SubmissionRecord submissionRecord = null;
-	 * 
-	 * private Record record = null;
-	 * 
-	 * private boolean trailer = null;
-	 * 
-	 */
+//	@Transient
+//	private HeaderRecord header = null;
+//
+//	@Transient
+//	private SubmissionRecord submissionRecord = null;
+//
+//	@Transientprivate
+//	Record record = null;
+
+	@Transient
+	private boolean trailer = false;
 
 	@Column(name = "creation_date")
 	private Date creationTime;

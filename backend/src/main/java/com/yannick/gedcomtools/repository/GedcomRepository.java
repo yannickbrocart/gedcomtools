@@ -6,8 +6,8 @@ import com.yannick.gedcomtools.model.Gedcom;
 
 public interface GedcomRepository extends JpaRepository<Gedcom, Long> {
 
-	@Query("SELECT g FROM Gedcom g WHERE g.status = ?1")
-	List<Gedcom> findByStatus(GedcomStatusType status);
+//	@Query("SELECT g FROM Gedcom g WHERE g.status = ?1")
+//	public List<Gedcom> findByStatus(String status);
 
 //	@Query("SELECT * FROM gedcom_files g WHERE g.created_by = ?1")
 //	List<Gedcom> findByCreator(long creatorId);
