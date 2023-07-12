@@ -32,7 +32,7 @@ public class GedcomControler {
 	@PostMapping("/gedcoms")
 	public ResponseEntity<Gedcom> createGedcoms(@RequestBody Gedcom gedcom) {
 		try {
-			Gedcom gedcomFile = gedcomRepository.save(new Gedcom(gedcom.getName(), getCreatedBy()));
+			Gedcom gedcomFile = gedcomRepository.save(new Gedcom(gedcom.getName(), gedcom.getCreatedBy()));
 			return new ResponseEntity<>(gedcomFile, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -42,8 +42,16 @@ public class GedcomControler {
 	@PutMapping("/gedcoms/{id}")
 	public ResponseEntity<Gedcom> updateGedcoms(@RequestBody Gedcom gedcom, @PathVariable("id") Long id) {
 		try {
-			Gedcom gedcomFile = gedcomRepository.save(new Gedcom(gedcom.getName(), getCreatedBy()));
-			return new ResponseEntity<>(gedcomFile, HttpStatus.CREATED);
+			Optional<Gedcom> gedcomToUpdate = gedcomRepository.findById(id);
+
+			if (gedcomToUpdate.isPresent()) {
+				Gedcom updatedGedcom = gedcomToUpdate.get();
+				updatedGedcom.setName(gedcom.getName());
+				updatedGedcom.setCreatedBy(gedcom.getCreatedBy());
+				return new ResponseEntity<>(gedcomRepository.save(updatedGedcom), HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
