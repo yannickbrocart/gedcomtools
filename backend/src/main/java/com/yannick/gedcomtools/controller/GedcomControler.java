@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yannick.gedcomtools.model.Gedcom;
+import com.yannick.gedcomtools.model.GedcomStatusType;
 import com.yannick.gedcomtools.repository.GedcomRepository;
 
 @CrossOrigin(origins = "http://localhost:8080")
@@ -62,10 +63,10 @@ public class GedcomControler {
 		try {
 			List<Gedcom> gedcomFilesList = new ArrayList<Gedcom>();
 			gedcomRepository.findAll().forEach(gedcomFilesList::add);
-			if (gedcomFilesList.isEmpty()) {
+			if (gedcomFilesList.isEmpty())
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			}
-			return new ResponseEntity<>(gedcomFilesList, HttpStatus.OK);
+			else
+				return new ResponseEntity<>(gedcomFilesList, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -79,6 +80,34 @@ public class GedcomControler {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			else
 				return new ResponseEntity<>(gedcom.get(), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@GetMapping("/findgedcomsbystatus/{status}")
+	public ResponseEntity<List<Gedcom>> findGedcomByStatus(@PathVariable("status") GedcomStatusType status) {
+		try {
+			List<Gedcom> gedcomFilesList = new ArrayList<Gedcom>();
+			gedcomRepository.findByStatus(GedcomStatusType.created).forEach(gedcomFilesList::add);
+			if (gedcomFilesList.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+			return new ResponseEntity<>(gedcomFilesList, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@GetMapping("/findgedcomsbycreator/{creatorid}")
+	public ResponseEntity<List<Gedcom>> findByCreatedBy(@PathVariable("creatorid") long creatorId) {
+		try {
+			List<Gedcom> gedcomFilesList = new ArrayList<Gedcom>();
+			gedcomRepository.findByCreatedBy(2).forEach(gedcomFilesList::add);
+			if (gedcomFilesList.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+			return new ResponseEntity<>(gedcomFilesList, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -104,21 +133,7 @@ public class GedcomControler {
 		}
 	}
 
-//	@GetMapping("/findgedcombystatus/{status}")
-//	public ResponseEntity<List<Gedcom>> findGedcomByStatus(@PathVariable("status") String status) {
-//		try {
-//			List<Gedcom> gedcomFilesList = new ArrayList<Gedcom>();
-//			gedcomRepository.findByStatus(status).forEach(gedcomFilesList::add);
-//			if (gedcomFilesList.isEmpty()) {
-//				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//			}
-//			return new ResponseEntity<>(gedcomFilesList, HttpStatus.OK);
-//		} catch (Exception e) {
-//			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//		}
-//	}
-
-//	@GetMapping("/gedcoms/{creator}")
+//	@GetMapping("/findgedcombycreator/{creator}")
 //	public ResponseEntity<List<Gedcom>> findGedcomByCreator(@PathVariable("creator") long creatorId) {
 //		try {
 //			List<Gedcom> gedcomFilesList = new ArrayList<Gedcom>();

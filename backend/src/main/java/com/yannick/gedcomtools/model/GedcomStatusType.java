@@ -4,25 +4,35 @@ public enum GedcomStatusType {
 	/**
 	 * Created
 	 */
-	created,
+	created("created"),
 
 	/**
 	 * In progress
 	 */
-	in_progress,
+	in_progress("in_progress"),
 
 	/**
 	 * Pending
 	 */
-	pending,
+	pending("pending"),
 
 	/**
 	 * Ended
 	 */
-	ended,
+	ended("ended"),
 
 	/**
 	 * Canceled
 	 */
-	canceled;
+	canceled("canceled");
+
+	private String value;
+
+	private GedcomStatusType(String value) {
+		this.value = value;
+	}
+
+	public String getGedcomStatusType() {
+		return this.value;
+	}
 }
