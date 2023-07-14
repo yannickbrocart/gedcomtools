@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yannick.gedcomtools.model.Gedcom;
+import com.yannick.gedcomtools.model.User;
 import com.yannick.gedcomtools.repository.GedcomRepository;
 
 @CrossOrigin(origins = "http://localhost:8080")
@@ -99,10 +100,10 @@ public class GedcomControler {
 //	}
 
 	@GetMapping("/findgedcomsbycreator/{creatorid}")
-	public ResponseEntity<List<Gedcom>> findByCreatedBy(@PathVariable("creatorid") long creatorId) {
+	public ResponseEntity<List<Gedcom>> findByCreatedBy(@PathVariable("creatorid") User createdBy) {
 		try {
 			List<Gedcom> gedcomFilesList = new ArrayList<Gedcom>();
-			gedcomRepository.findByCreatedBy(2).forEach(gedcomFilesList::add);
+			gedcomRepository.findByCreatedBy(createdBy).forEach(gedcomFilesList::add);
 			if (gedcomFilesList.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}

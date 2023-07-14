@@ -9,9 +9,9 @@ import com.yannick.gedcomtools.model.GedcomStatusType;
 
 public interface GedcomRepository extends JpaRepository<Gedcom, Long> {
 
-	public List<Gedcom> findByStatus(GedcomStatusType status);
+//	public List<Gedcom> findByStatus(GedcomStatusType status);
 
-	public List<Gedcom> findByCreatedBy(long creatorId);
+	public List<Gedcom> findByCreatedBy(User createdBy);
 
 //	List<Gedcom> findByLastModifier(long lastModifierId);
 }
